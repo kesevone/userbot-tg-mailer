@@ -25,17 +25,6 @@ def has_job(data):
 
 @user.on_message(filters.me & filters.command('start'))
 async def start_spamer(client: Client, msg: Message):
-    test = []
-    dialogs = user.get_dialogs()
-    async for dialog in dialogs:
-        test.append(dialog.chat.id)
-    for chat in test:
-        print(chat)
-        r = await user.invoke(
-            functions.messages.GetDialogs(offset_date=0, offset_id=0, offset_peer=types.InputPeerChat(chat_id=chat), hash=0,
-                                          limit=0, folder_id=1))
-        print(r)
-
     data = db.time_data(return_data=True)
     await msg.reply('Отправьте любое сообщение в этот чат, чтобы рассылка запустилась.')
     sched.add_job(spam_sender, 'interval', hours=data[0], kwargs={'client': client, 'msg': msg}, id='sender', replace_existing=True)
