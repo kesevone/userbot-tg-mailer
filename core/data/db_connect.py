@@ -1,8 +1,6 @@
 import configparser
 import sqlite3
 
-from core.variables import path_db
-
 cfg = configparser.ConfigParser()
 
 
