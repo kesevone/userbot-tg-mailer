@@ -1,29 +1,42 @@
-# ЮЗЕРБОТ СПАМЕР
-**Юзербот-спамер**, написанный на **Pyrogram**. **Полная кастомизация**, установка времени работы спамера, интервал между отправкой сообщением. **Добавление текста или фото**.
+# Telegram User Bot Mailer 
+**Userbot for mailing in your chats** written in **Pyrogram** + library for middlewares **Pyrogram-patch**.
+Database **SQLite** + **SQLAlchemy** (aiosqlite) for storing account data, chats and mailing history.
 
-## 🔎 Функционал
-+ Установка текста и/или фото в сообщение
-+ Установка времени работы спамера (в часах) и интервала отправки сообщений (в секундах)
-+ Просмотр установленных данных (время работы, интервал, текст и/или фото)
-+ Автоматические ожидание разблокировки API (бан за антифлуд)
-+ Показ количества чатов, в которые будет отправлено сообщение
-+ Показ итогового количества чатов, в которые сообщение было отправлено
+# ❗️ Important information ❗️
+**The developer does not support intrusive spam in chats and does not recommend using it for bad purposes.
+Use bot exclusively for good purposes, for example: sending messages to your chats, chats for services.
+The bot must not violate the TOS**
 
-## ⬇️ Установка
-1. Установите необходимые библиотеки командой `pip install -r requirements.txt`
-2. Зайдите на ([официальный сайт Telegram](https://my.telegram.org/apps)) для создания приложений и получите оттуда `API_ID & API_HASH`
-3. Введите эти данные в файл `config.ini`, который находится рядом с `main.py`
-4. Запустите `main.py` и следуйте дальнейшим инструкциям
+## 🔎 Functionality
++ **Installing text in the mailing**, support for **HTML formatting**.
++ **Setting the interval** between sending a message in seconds.
++ **Parsing of all chats** (supergroup/group), does not affect the personal account and archive.
++ Get information about your current or any other account from anywhere in «**Saved Messages**».
++ Basic protection against invalid chats (deleted chat, kicked/banned). Automatically deletes it from the database.
++ Detailed statistics about the mailing: the time spent on the mailing, the number of successful chats, the number of unsuccessful chats.
 
-## 📝 Управление спамером
-+ `/start` — запускает спамер во все ваши чаты, перед началом нужно указать фото и/или текст рассылаемого сообщения
-+ `/info` — выводит установленную информацию (время работы, интервал, текст и/или фото)
-+ `/timer` `/timer 0 0` — устанавливает время работы спамера и интервал (после команды нужно указать два значения: 1 — время работы в часах, 12 — интервал в секундах)
-+ `/text` `/text 0` — устанавливает текст для сообщения (поддерживается HTML-разметка, эмодзи и т.д)
-+ `/photo` `/photo 0` — устанавливает фото для сообщения
----
-> [!WARNING]
-> Запуск спамера не совсем корректно работает, необходимо после команды `/start` отправить любое сообщение, тогда рассылка начнётся. Я пока не нашёл решение, как это фиксится :( 
+## ⬇️ Installation (Ubuntu/Linux/Windows)
+1. Install the virtual environment with **Python >= 3.11** with the command: `python -m venv .venv`
+2. Activate virtual environment with the command: `source .venv/bin/activate` or `.venv/Scripts/activate`
+3. Install the necessary libraries with the command: `pip install -r requirements.txt `
+4. Go to **[Telegram's official website](https://my.telegram.org/apps )** to create application and get `API_ID` and `API_HASH` from there
+5. Go to the `core` folder, find and change the file name `.env.dist` to `.env`
+6. In this file, set the values of `API_ID` and `API_HASH` to your own, obtained from the site. The `session_name` variable is optional, this will be the name of your session with the account.
+7. Run **migrations to create tables** in the database with the command: `alembic upgrade head`
+8. Run the bot with the command: `python main.py ` and follow the **further instructions from Pyrogram** if you are creating a session for the first time.
 
-**[Мой Telegram](t.me/kesevone)**
+## 📝 Spammer management (in «Saved Messages»)
++ `start` | `start Test Mailing` is the command to **start mailing**, after which you need to **set your text**.
++ `info` | `info 00000` — displays **information about the current account**, for information about another account after the command, specify its **User ID**
++ `interval` | `interval 5` — sets the interval between sending a message in seconds.
++ `parse` — parses all chats (supergroup/group), except those that are archived.
++ `help` — displays information **about the commands and functionality** of the bot.
 
+## 📌 TODO
++ [ ] Integration of **APScheduler**, a full-fledged task scheduler. It will give you the opportunity to flexibly manage the launched newsletter.
++ [ ] **GUI interface**
+  + [ ] **Selective** chat mailing list.
+  + [ ] **Multi-accounts**.
+
+
+**[Contact me on Telegram](https://t.me/kesevone )**
